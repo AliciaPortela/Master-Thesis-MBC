@@ -5,7 +5,7 @@ library(MASS) # statistic library with lm function for linear regression
 library(raster) # for spacial (raster) data
 
 # my functions 
-source("Master-s-Thesis-/GEAM/GEAM-Multiple linear regression/2.GEAM_Stepwise_regression_functions.R")
+source("Master-Thesis-MBC/7. GEAM and environmental distribution range inference/GEAM_inference_functions.R")
 
 # set working directory 
 setwd("Master-s-Thesis-/GEAM/Pre-GEAM_filter_sig._SNPs_and_add_environmental_variables/Databases_sig_SNPs_env_data/")
