@@ -17,7 +17,7 @@ This criterion aims to maximize the environmental variance and minimize the geog
 Environmental divergence index = (Environmental distance between populations)/(Geographic distance between populations)
 Then, a ranking with the maximum punctuations of the environmental divergence index of pairs of populations was established, one for each environmental variable. 
 
-	- Population size
+  - Population size
   
 From those rankings, only pairs of populations with a minimum number of genotyped individuals were selected. This criterion is based on the results thrown by Graph-aware Retrieval of Selective Sweeps (GRoSS) (Refoyo-Martínez et al., 2019), the tool that is used in this study to find loci under selection. For low sample sizes (N = 4), the authors found high rates of type I and II errors, whereas it does not happen for greater sample sizes. In order to ensure the minimization of errors, the threshold was established at N = 12. For that reason, any pair of populations that did not meet this criterion was excluded.
 
