@@ -111,17 +111,17 @@ rrad <- raster("rad.tif")
 rth <- raster("th.tif")
 rele <- raster("ele.tif")
 
-# working directory to save environmental range distribution inference plot results 
+# working directory to save range distribution inference plot results 
 setwd("Master-Thesis-MBC/7. GEAM and distribution range inference/Results/2. Best model")
 
-# function to plot environmental distribution range
+# function to plot distribution range
 # needs to be debugged
 GEAM_extremes_plot <- function(ras, label, env.label){
   
   # comparing extreme values of rasters with 
   # the predicted by GEAM and then decide to plot or not:
   
-  # 1. if they remain inside the raster margins (at least one)
+  # 1. if they remain inside the raster margins (at least one)...
   # plot
   ext_pred <- extremes[extremes$Label == label, 2:3]
   
@@ -158,7 +158,9 @@ GEAM_extremes_plot <- function(ras, label, env.label){
   }else{ 
     
     # 2. if they remain outside the raster margins, (=prediction occupies all the environment),
-    # the map does not make sense (=all). Message:
+    # the map does not make sense (=all). 
+    # Do not plot it
+    # Message:
     print("Prediction occupies the whole environment")
   }
   
