@@ -12,7 +12,7 @@ dir()
 #### Phylogeny 1 ####
 
 # read the table 
-tabletsv1 <- read.csv("human_chr12_11KG_CLM_PUR_FRN_SAR_ADY_RUS_ESN_MZB_HZP_KLS_MAN_MSL_IBS_BAS_PEL_PTH_CEU_MXL.tsv", sep = '\t', header = TRUE)
+tabletsv1 <- read.csv("human_chr12_1.tsv", sep = '\t', header = TRUE)
 
 # check the table dimensions 
 head(tabletsv1)
@@ -71,7 +71,7 @@ ggplot(dataframe1, aes(x=Branches, y=Number_outliers)) + geom_bar(stat ="identit
 #### Phylogeny 2 ####
 
 # read the table 
-tabletsv2 <- read.csv("human_chr12_21KG_CLM_PUR_FRN_SAR_ADY_RUS_ESN_MZB_HZP_KLS_MAN_MSL_IBS_BAS_PEL_PTH_CEU_MXL.tsv", sep = '\t', header = TRUE)
+tabletsv2 <- read.csv("human_chr12_2.tsv", sep = '\t', header = TRUE)
 
 # check the table dimensions 
 head(tabletsv2)
@@ -113,7 +113,7 @@ names_branches_2
 as.vector(names_branches_2)
 class(names_branches_2)
 
-#### create dataframe 1 with data of phylogeny 1 ####
+#### create dataframe 2 with data of phylogeny 2 ####
 dataframe2 <- data.frame(names_branches_2, outliers_branch_2)
 dataframe2
 
