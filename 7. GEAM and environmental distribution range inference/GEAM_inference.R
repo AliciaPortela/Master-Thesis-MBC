@@ -8,7 +8,7 @@ library(raster) # for spacial (raster) data
 source("Master-Thesis-MBC/7. GEAM and environmental distribution range inference/GEAM_inference_functions.R")
 
 # set working directory 
-setwd("Master-s-Thesis-/GEAM/Pre-GEAM_filter_sig._SNPs_and_add_environmental_variables/Databases_sig_SNPs_env_data/")
+setwd("Master-Thesis-MBC/6. Preparing data for GEAM/Outliers & environmental data/Random subsampling of outliers")
 
 # charge input tables with 1000 random samples 
 load("1000_random_SNPs_gen1.RData"); load("1000_random_SNPs_gen2.RData")
@@ -42,7 +42,7 @@ for(i in 1 : length(gs1)){
 }
 
 # save table with AIC and Adj_Rsq for each model 
-setwd("Master-s-Thesis-/GEAM/GEAM-Multiple linear regression/Results/1.Searching_best_model")
+setwd("Master-Thesis-MBC/7. GEAM and environmental distribution range inference/Results/1. Searching the best model")
 write.table(res, "AIC_adjRsq.txt", row.names=FALSE, quote=F, sep="\t")
 
 # save plots of AIC and Adj_Rsq distributions
@@ -63,7 +63,7 @@ plots_save(Label="G2EAM_ele", var="AIC")
 # 2. Obtaining the best model
 # select the regression model with the lowest value of AIC for each environmental variable and genomic database (6 models)
 
-setwd("Master-s-Thesis-/GEAM/GEAM-Multiple linear regression/Results/2.Best_model")
+setwd("Master-Thesis-MBC/7. GEAM and environmental distribution range inference/Results/2. Best model/")
 bg_results <- best_GEAM()
 
 # save results of the obtained models in table format 
@@ -106,18 +106,65 @@ for(i in 1:nrow(extremes)){
 }
 
 # open rasters of environmental variables to plot the distribution range 
-setwd("Master-s-Thesis-/GEAM/GEAM-Multiple linear regression/Rasters_environmental_variables")
+setwd("Master-Thesis-MBC/1. Environmental data retrieval/Environmental rasters")
 rrad <- raster("rad.tif")
 rth <- raster("th.tif")
 rele <- raster("ele.tif")
 
 # working directory to save environmental range distribution inference plot results 
-setwd("Master-s-Thesis-/GEAM/GEAM-Multiple linear regression/Results/2.Best_model")
+setwd("Master-Thesis-MBC/7. GEAM and environmental distribution range inference/Results/2. Best model")
 
-# 
+# function to plot environmental distribution range
+# needs to be debugged
+GEAM_extremes_plot <- function(ras, label, env.label){
+  
+  # comparing extreme values of rasters with 
+  # the predicted by GEAM and then decide to plot or not:
+  
+  # 1. if they remain inside the raster margins (at least one)
+  # plot
+  ext_pred <- extremos[extremos$Label == label, 2:3]
+  
+  min_ras <- min(values(ras)[-which(is.na(values(ras)))])
+  max_ras <- max(values(ras)[-which(is.na(values(ras)))])
+  
+  if(min(ext_pred) > min_ras | max(ext_pred) < max_ras){
+    
+    # change to '1000' NAs (NA=sea) to operate 
+    # with them
+    values(ras)[which(is.na(values(ras)))] <- 1000
+    
+    values(ras) <- round(values(ras), digits=6)
+    presences <- which(values(ras) >= min(ext_pred) & values(ras) <= max(ext_pred))
+    
+    # if an environmental value is predicted in the sea, remove it
+    if(any(presences %in% which(values(ras) == 1000))){
+      presences <- presences[-which(presences %in% which(values(ras)==0))]
+    }
+    values(ras)[presences] <- 950
+    values(ras)[! values(ras) %in% c(1000, 950)] <- 500
+    
+    cuts = c(0,600,960,1100) # set breaks for colors
+    pal <- colorRampPalette(c("gray","darkred", "white"))
+    
+    # make and save maps
+    x11()
+    tiff(paste(label, ".tiff", sep=""), units="in", width=15, height=9, res=300)
+    plot(ras, breaks=cuts, col = pal(3), legend=F, main=label, 
+         xlab=paste("from", round(ext_pred[1,1], digits=2),
+                    "to", round(ext_pred[1,2], digits=2)))
+    dev.off()
+    
+  }else{ # 2. if they remain outside the raster margins, (=prediction occupies all the environment),
+    # the map does not make sense (=all). Message:
+    print("La predicción ocupa todo el ambiente")
+  }
+  
+}
+
 GEAM_extremos_plot(ras=rth, label="G1EAM_th")
 GEAM_extremos_plot(ras=rrad, label="G1EAM_rad")
 GEAM_extremos_plot(ras=rele, label="G1EAM_ele")
 GEAM_extremos_plot(ras=rth, label="G2EAM_th")
 GEAM_extremos_plot(ras=rrad, label="G2EAM_rad")
-# GEAM_extremos_plot(ras=rele, label="G2EAM_ele")
+GEAM_extremos_plot(ras=rele, label="G2EAM_ele")
