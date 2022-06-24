@@ -123,7 +123,7 @@ GEAM_extremes_plot <- function(ras, label, env.label){
   
   # 1. if they remain inside the raster margins (at least one)
   # plot
-  ext_pred <- extremos[extremos$Label == label, 2:3]
+  ext_pred <- extremes[extremes$Label == label, 2:3]
   
   min_ras <- min(values(ras)[-which(is.na(values(ras)))])
   max_ras <- max(values(ras)[-which(is.na(values(ras)))])
@@ -155,16 +155,18 @@ GEAM_extremes_plot <- function(ras, label, env.label){
                     "to", round(ext_pred[1,2], digits=2)))
     dev.off()
     
-  }else{ # 2. if they remain outside the raster margins, (=prediction occupies all the environment),
+  }else{ 
+    
+    # 2. if they remain outside the raster margins, (=prediction occupies all the environment),
     # the map does not make sense (=all). Message:
-    print("La predicción ocupa todo el ambiente")
+    print("Prediction occupies the whole environment")
   }
   
 }
 
-GEAM_extremos_plot(ras=rth, label="G1EAM_th")
-GEAM_extremos_plot(ras=rrad, label="G1EAM_rad")
-GEAM_extremos_plot(ras=rele, label="G1EAM_ele")
-GEAM_extremos_plot(ras=rth, label="G2EAM_th")
-GEAM_extremos_plot(ras=rrad, label="G2EAM_rad")
-GEAM_extremos_plot(ras=rele, label="G2EAM_ele")
+GEAM_extremes_plot(ras=rth, label="G1EAM_th")
+GEAM_extremes_plot(ras=rrad, label="G1EAM_rad")
+GEAM_extremes_plot(ras=rele, label="G1EAM_ele")
+GEAM_extremes_plot(ras=rth, label="G2EAM_th")
+GEAM_extremes_plot(ras=rrad, label="G2EAM_rad")
+GEAM_extremes_plot(ras=rele, label="G2EAM_ele")
