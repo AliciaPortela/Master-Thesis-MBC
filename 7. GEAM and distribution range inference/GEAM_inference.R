@@ -72,11 +72,11 @@ write.table(bg_results$table, "GEAM_results.txt", row.names = F, quote = F, sep 
 coeffs <- bg_results$Coeffs
 
 
-# 3. Inference of environmental distribution range applying best regression models  
-# Define the environmental limits of the environmental distribution range
+# 3. Inference of distribution range applying best regression models  
+# Define the environmental limits of the distribution range
 # and fill the cells of the raster that are between the minimum and maximum values
 
-# create a table to store the values of the extremes of the environmental distribution range
+# create a table to store the values of the extremes of the distribution range
 extremes <- as.data.frame(matrix(ncol=3, nrow=6))
 colnames(extremes) <- c("Label", "Zeros", "Ones")
 extremes$Label <- bg_results$table$Label # fill the first column with the gs-env.var id (e.g. "G1EAM_rad")
