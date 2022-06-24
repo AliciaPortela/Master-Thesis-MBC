@@ -1,6 +1,6 @@
 #!/bin/bash
 
-output="Master-s-Thesis-/Outlier_test/Output_GRoSS/"
+output="Master-Thesis-MBC/5. Outlier test: finding SNPs under selection (GRoSS)/5.2. Running GRoSS/Outputs"
 
 
 # for Treemix topology
