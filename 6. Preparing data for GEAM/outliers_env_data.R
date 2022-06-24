@@ -1,12 +1,12 @@
 # charge functions 
-source("Master-s-Thesis-/GEAM/Pre-GEAM_filter_sig._SNPs_and_add_environmental_variables/1.Filtering_sig_SNPs_add_env_var_functions.R")
+source("Master-Thesis-MBC/6. Preparing data for GEAM/outliers_env_data_functions_R")
 
 ###################################
 ## 1. FILTERING SIGNIFICANT SNPs ##
 ###################################
 
 # open GRoSS results 
-setwd("Master-s-Thesis-/Outlier_test/Output_GRoSS")
+setwd("Master-Thesis-MBC/5. Outlier test: finding SNPs under selection (GRoSS)/5.2. Running GRoSS/Outputs")
 
 h1 <- read.table("human_chr12_1.tsv", header=T, sep="\t")
 h2 <- read.table("human_chr12_2.tsv", header=T, sep="\t")
@@ -53,7 +53,7 @@ h2s <- h2[which(mins2 < 0.00001), ]
 # filter allele frequency files by significant SNPs ()
 # enter the directory where allele frequency files (.afreq) are
 # (each file corresponds to a population --> 18 in total)
-setwd("Master-s-Thesis-/GEAM/Pre-GEAM_filter_sig._SNPs_and_add_environmental_variables/Allele_freq_all_SNPs/")
+setwd("Master-Thesis-MBC/6. Preparing data for GEAM/Allele frequencies/Allele frequencies by population")
 
 # create output empty lists. Each element of the lists will correspond to the filtering  
 # of allele frequency tables of each population (fr) by significant SNPs (those in h1s and h2s)
@@ -102,7 +102,7 @@ gen2 <- as.data.frame(cbind("pop" = rownames(gen2), gen2)) # as first column pop
 rownames(gen2) <- NULL # remove rownames
 
 # open environmental data 
-setwd("Master-s-Thesis-/GEAM/Pre-GEAM_filter_sig._SNPs_and_add_environmental_variables/Environmental data/")
+setwd("Master-Thesis-MBC/1. Environmental data retrieval")
 # gen.env = environment of populations in 1000genomes database 
 load("3.environment_1000genomes_populations.RData")
 # sim.env = environment of populations in Simons database
@@ -110,6 +110,7 @@ load("3.environment_simons_populations.RData")
 
 # change 3 letter codes by complete population names in genomic 
 # tables to be able to join to the environmental ones by merge function 
+stwd("Master-Thesis-MBC/6. Preparing data for GEAM")
 corr <- read.table("correspondence_names_populations.txt", header=T, sep="\t")
 
 gen1 <- merge(gen1, corr, by.x="pop", by.y="Code")
@@ -130,8 +131,8 @@ gen1 <- merge(gen1, gen.env, by="pop")
 gen2 <- merge(gen2, gen.env, by="pop")
 
 # save complete databases with significant SNPs and environmental data 
-write.csv(gen1, "1.gen1.csv", row.names=FALSE)
-write.csv(gen2, "1.gen2.csv", row.names=FALSE)
+write.csv(gen1, "./gen1.csv", row.names=FALSE)
+write.csv(gen2, "./gen2.csv", row.names=FALSE)
 
 # there are too much variables to include in a PCA 
 # make 1000 random subsamples of 5% of the total of SNPs
@@ -163,6 +164,6 @@ for(i in 1 : 1000){
 }
 
 # save random tables (input of GEAM)
-setwd("Master-s-Thesis-/GEAM/Pre-GEAM_filter_sig._SNPs_and_add_environmental_variables/Databases_sig_SNPs_env_data/")
+setwd("Master-Thesis-MBC/6. Preparing data for GEAM/Outliers & environmental data/Random subsampling of outliers/")
 save(gs1, file = "1000_random_SNPs_gen1.RData")
 save(gs2, file = "1000_random_SNPs_gen2.RData")
