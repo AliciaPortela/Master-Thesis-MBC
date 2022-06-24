@@ -5,7 +5,7 @@ library(MASS) # statistic library with lm function for linear regression
 library(raster) # for spacial (raster) data
 
 # my functions 
-source("Master-Thesis-MBC/7. GEAM and environmental distribution range inference/GEAM_inference_functions.R")
+source("Master-Thesis-MBC/7. GEAM and distribution range inference/GEAM_inference_functions.R")
 
 # set working directory 
 setwd("Master-Thesis-MBC/6. Preparing data for GEAM/Outliers & environmental data/Random subsampling of outliers")
@@ -42,7 +42,7 @@ for(i in 1 : length(gs1)){
 }
 
 # save table with AIC and Adj_Rsq for each model 
-setwd("Master-Thesis-MBC/7. GEAM and environmental distribution range inference/Results/1. Searching the best model")
+setwd("Master-Thesis-MBC/7. GEAM and distribution range inference/Results/1. Searching the best model")
 write.table(res, "AIC_adjRsq.txt", row.names=FALSE, quote=F, sep="\t")
 
 # save plots of AIC and Adj_Rsq distributions
@@ -63,7 +63,7 @@ plots_save(Label="G2EAM_ele", var="AIC")
 # 2. Obtaining the best model
 # select the regression model with the lowest value of AIC for each environmental variable and genomic database (6 models)
 
-setwd("Master-Thesis-MBC/7. GEAM and environmental distribution range inference/Results/2. Best model/")
+setwd("Master-Thesis-MBC/7. GEAM and distribution range inference/Results/2. Best model/")
 bg_results <- best_GEAM()
 
 # save results of the obtained models in table format 
@@ -112,7 +112,7 @@ rth <- raster("th.tif")
 rele <- raster("ele.tif")
 
 # working directory to save environmental range distribution inference plot results 
-setwd("Master-Thesis-MBC/7. GEAM and environmental distribution range inference/Results/2. Best model")
+setwd("Master-Thesis-MBC/7. GEAM and distribution range inference/Results/2. Best model")
 
 # function to plot environmental distribution range
 # needs to be debugged
