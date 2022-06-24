@@ -1,5 +1,5 @@
 # charge functions 
-source("Master-Thesis-MBC/6. Preparing data for GEAM/outliers_env_data_functions_R")
+source("Master-Thesis-MBC/6. Preparing data for GEAM/outliers_env_data_functions.R")
 
 ###################################
 ## 1. FILTERING SIGNIFICANT SNPs ##
