@@ -63,7 +63,7 @@ for(i in 1:length(list.files(pattern="afreq"))){
 
   fr <- read.table(list.files(pattern="afreq")[[i]])
   
-  # Guardo los resultados como elementos de las listas-output (=una población)
+  # save results as elements of output lists (=one population)
   frh1_list[[i]] <- filtering(fr, h1s)
   frh2_list[[i]] <- filtering(fr, h2s)
   
@@ -131,8 +131,8 @@ gen1 <- merge(gen1, gen.env, by="pop")
 gen2 <- merge(gen2, gen.env, by="pop")
 
 # save complete databases with significant SNPs and environmental data 
-write.csv(gen1, "./gen1.csv", row.names=FALSE)
-write.csv(gen2, "./gen2.csv", row.names=FALSE)
+write.csv(gen1, "Master-Thesis-MBC/6. Preparing data for GEAM/Outliers & environmental data/Outliers-environment databases/gen1.csv", row.names=FALSE)
+write.csv(gen2, "Master-Thesis-MBC/6. Preparing data for GEAM/Outliers & environmental data/Outliers-environment databases/gen2.csv", row.names=FALSE)
 
 # there are too much variables to include in a PCA 
 # make 1000 random subsamples of 5% of the total of SNPs
