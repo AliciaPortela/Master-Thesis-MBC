@@ -21,11 +21,11 @@ Then, a ranking with the maximum punctuations of the environmental divergence in
   
 From those rankings, only pairs of populations with a minimum number of genotyped individuals were selected. This criterion is based on the results thrown by Graph-aware Retrieval of Selective Sweeps (GRoSS) (Refoyo-Martínez et al., 2019), the tool that is used in this study to find loci under selection. For low sample sizes (N = 4), the authors found high rates of type I and II errors, whereas it does not happen for greater sample sizes. In order to ensure the minimization of errors, the threshold was established at N = 12. For that reason, any pair of populations that did not meet this criterion was excluded.
 
-	- Availability of their genomic data in genomic databases of interest
+   - Availability of their genomic data in genomic databases of interest
   
 At first, the genomic data was intended to be extracted from different independent databases, to later unify them. The genomic databases from which it is easier to extract genomic data in VCF format are 1000 Genomes and Human Genome Diversity Project (HGDP). HGDP is a genomic database similar to SGDP, with the addition that it contains a greater number of samples by population. For that reason, only those pairs of populations whose individual’s genomic data were included in the 1000 Genomes and HGDP were selected (rankings3). However, a recent article (Wohns et al., 2022) was published while this study was being developed. In it, genomic data from 1000 Genomes, HGDP and SGDP are unified in the same database. This fact facilitated the process of genomic data extraction (see the section ‘Genomic data retrieval’). Due to the change in the methodological strategy, the application of this criterion was no longer necessary. Even so, it was maintained, since the selection of the populations was carried out prior to the publication of the aforementioned article.
 
-	- One pair of populations by great continent 
+   - One pair of populations by great continent 
   
 Continents are the geographic accidents that contribute the most to the genetic structure. In order to have a representative sample of humankind, only four pairs of populations (each belonging to a great continent: Africa, Europe, Asia and America) were selected for each environmental variable. The exception was rad, for which five pairs were selected. It was considered interesting to include two populations from different continents. 
 
